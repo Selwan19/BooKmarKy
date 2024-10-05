@@ -1,0 +1,9 @@
+{
+	"name": "BooKmarKy-DataFactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c83654a8-28be-4839-9fa9-b0c85f1f3a59",
+		"tenantId": "f00f2f39-2ff1-431f-aba9-3273f8ad190e"
+	}
+}
