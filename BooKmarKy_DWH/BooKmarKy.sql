@@ -44,6 +44,16 @@ CREATE TABLE [Recommendation_Dimension] (
 )
 GO
 
+CREATE TABLE [Content_Metadata_Dimension] (
+  [Content_ID] int PRIMARY KEY IDENTITY(1, 1),
+  [Content_Type] nvarchar(255),
+  [Content_Source] nvarchar(255),
+  [Author_Name] nvarchar(255),
+  [Content_Length] int,
+  [Publish_Date] date
+)
+GO
+
 CREATE TABLE [Bookmark_Fact] (
   [Bookmark_ID] int PRIMARY KEY,
   [User_ID] int,
@@ -51,6 +61,7 @@ CREATE TABLE [Bookmark_Fact] (
   [Category_ID] int,
   [Date_ID] int,
   [Bookmark_Type_ID] int,
+  [Content_ID] int,
   [Recommendation_ID] int,
   [Bookmark_Count] int,
   [Bookmark_Click_Count] int,
@@ -74,6 +85,9 @@ ALTER TABLE [Bookmark_Fact] ADD FOREIGN KEY ([Date_ID]) REFERENCES [Date_Dimensi
 GO
 
 ALTER TABLE [Bookmark_Fact] ADD FOREIGN KEY ([Bookmark_Type_ID]) REFERENCES [Bookmark_Type_Dimension] ([Bookmark_Type_ID])
+GO
+
+ALTER TABLE [Bookmark_Fact] ADD FOREIGN KEY ([Content_ID]) REFERENCES [Content_Metadata_Dimension] ([Content_ID])
 GO
 
 ALTER TABLE [Bookmark_Fact] ADD FOREIGN KEY ([Recommendation_ID]) REFERENCES [Recommendation_Dimension] ([Recommendation_ID])
