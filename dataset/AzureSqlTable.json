@@ -9,22 +9,23 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "prop_0",
+				"name": "num",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "review",
+				"name": "text",
 				"type": "text"
 			},
 			{
-				"name": "sentiment",
-				"type": "varchar"
+				"name": "category",
+				"type": "int",
+				"precision": 10
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Analysis"
+			"table": "Summarition"
 		}
 	}
 }
