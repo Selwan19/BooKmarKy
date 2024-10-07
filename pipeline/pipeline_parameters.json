@@ -5,7 +5,14 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy data2",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -34,6 +41,56 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ICAO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ICAO",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "IATA",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IATA",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MAKER",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MAKER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DESCRIPTION",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DESCRIPTION",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
@@ -46,7 +103,7 @@
 						"referenceName": "sourceCSV",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileName": "sourceCSV"
+							"FileName": "planes.csv"
 						}
 					}
 				],
@@ -55,10 +112,26 @@
 						"referenceName": "CarsSqlTable",
 						"type": "DatasetReference",
 						"parameters": {
-							"TableName": "Cars"
+							"TableName": "Planes"
 						}
 					}
 				]
+			},
+			{
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
 			}
 		],
 		"annotations": []
