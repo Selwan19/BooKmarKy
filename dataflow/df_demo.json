@@ -6,19 +6,11 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "DelimitedText1",
-						"type": "DatasetReference"
-					},
 					"name": "source"
 				}
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "DelimitedText2",
-						"type": "DatasetReference"
-					},
 					"name": "sink1"
 				}
 			],
@@ -37,8 +29,7 @@
 				"          sentiment as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source",
+				"     validateSchema: false) ~> source",
 				"source filter(sentiment=='positive') ~> filter",
 				"filter select(mapColumn(",
 				"          review,",

@@ -1,0 +1,30 @@
+{
+	"name": "AzureSqlTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "prop_0",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "review",
+				"type": "text"
+			},
+			{
+				"name": "sentiment",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Analysis"
+		}
+	}
+}
