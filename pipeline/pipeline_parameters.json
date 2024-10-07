@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "pipeline_parameters",
 	"properties": {
 		"activities": [
 			{
@@ -44,13 +44,19 @@
 				"inputs": [
 					{
 						"referenceName": "sourceCSV",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": "sourceCSV"
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "CarsSqlTable",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": "Cars"
+						}
 					}
 				]
 			}
