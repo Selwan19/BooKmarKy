@@ -1,5 +1,10 @@
 {
 	"name": "BooKmarKy-DataFactory",
+	"properties": {
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "false"
+		}
+	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
