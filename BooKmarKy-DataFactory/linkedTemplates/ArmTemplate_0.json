@@ -210,6 +210,9 @@
 						{
 							"name": "filter",
 							"description": "filter the sentiment to positive only "
+						},
+						{
+							"name": "select"
 						}
 					],
 					"scriptLines": [
@@ -221,7 +224,13 @@
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> source",
 						"source filter(sentiment=='positive') ~> filter",
-						"filter sink(allowSchemaDrift: true,",
+						"filter select(mapColumn(",
+						"          review,",
+						"          sentiment",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select",
+						"select sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> sink1"
