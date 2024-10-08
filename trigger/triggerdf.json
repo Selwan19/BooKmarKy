@@ -1,0 +1,24 @@
+{
+	"name": "triggerdf",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "df_pipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 15,
+				"startTime": "2024-10-10T08:30:00",
+				"timeZone": "Egypt Standard Time"
+			}
+		}
+	}
+}

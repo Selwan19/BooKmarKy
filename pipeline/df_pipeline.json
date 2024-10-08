@@ -59,7 +59,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "sourceDB1",
+						"referenceName": "outputs",
 						"type": "DatasetReference",
 						"parameters": {
 							"filename": "Summartion data.csv"
