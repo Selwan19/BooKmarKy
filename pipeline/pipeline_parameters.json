@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copy data2",
+						"activity": "variable1",
 						"dependencyConditions": [
 							"Completed"
 						]
@@ -44,50 +44,76 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "ICAO",
+									"name": "Make",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "ICAO",
+									"name": "Make",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "IATA",
+									"name": "Model",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "IATA",
+									"name": "Model",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "MAKER",
+									"name": "Type",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "MAKER",
+									"name": "Type",
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "DESCRIPTION",
+									"name": "Origin",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "DESCRIPTION",
+									"name": "Origin",
 									"type": "String",
 									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "DriveTrain",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DriveTrain",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Length",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Length",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 18
 								}
 							}
 						],
@@ -103,7 +129,10 @@
 						"referenceName": "sourceCSV",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileName": "planes.csv"
+							"FileName": {
+								"value": "@concat(pipeline().parameters.filename,'.csv')",
+								"type": "Expression"
+							}
 						}
 					}
 				],
@@ -112,7 +141,10 @@
 						"referenceName": "CarsSqlTable",
 						"type": "DatasetReference",
 						"parameters": {
-							"TableName": "Planes"
+							"TableName": {
+								"value": "@pipeline().parameters.tablename",
+								"type": "Expression"
+							}
 						}
 					}
 				]
@@ -130,10 +162,93 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CarsSqlTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": {
+								"value": "@pipeline().parameters.tablename",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sourceCSV",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileName": {
+								"value": "@concat(pipeline().parameters.filename,'-',utcNow(),'.csv')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "variable1",
+				"description": "",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Copy data2",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Temp",
+					"value": "123"
 				}
 			}
 		],
+		"parameters": {
+			"filename": {
+				"type": "string"
+			},
+			"tablename": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"Temp": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
