@@ -1,5 +1,5 @@
 {
-	"name": "sourceDB1",
+	"name": "outputs",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "blob_linkedservice",
@@ -19,7 +19,7 @@
 					"value": "@dataset().filename",
 					"type": "Expression"
 				},
-				"container": "source"
+				"container": "output"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
