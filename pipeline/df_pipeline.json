@@ -53,7 +53,10 @@
 						"referenceName": "sourceDB1",
 						"type": "DatasetReference",
 						"parameters": {
-							"filename": "Summartion data.csv"
+							"filename": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
 						}
 					}
 				],
@@ -62,7 +65,10 @@
 						"referenceName": "outputs",
 						"type": "DatasetReference",
 						"parameters": {
-							"filename": "Summartion data.csv"
+							"filename": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
 						}
 					}
 				]
