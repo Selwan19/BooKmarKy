@@ -41,7 +41,8 @@
 				"     validateSchema: false,",
 				"     partitionFileNames:['movieclean.csv'],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> Movieclean"
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1) ~> Movieclean"
 			]
 		}
 	}
